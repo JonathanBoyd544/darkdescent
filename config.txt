@@ -1,0 +1,32 @@
+# Realm configuration
+#     levels
+#     file name prefix for levels
+#     [ may need height/width of each level or determine from the config file row/col values/counts ]
+#     home space coordinates
+    
+[Realm]
+Name: Labyrinth's Edge
+Context: Demo
+Version: 1.0
+Levels = 4
+FNamePrefix = ./demo_lvl-
+
+InventorySlots = 10
+
+
+# Space configuration
+#     level
+#     column
+#     row
+#     type (1 = Room, 2 = Hall, 3 = ...)
+#     Dest_North
+#     Dest_South
+#     Dest_East
+#     Dest_West
+#     Dest_Up
+#     Dest_Down
+#     Dest_Portal
+#     IsLit           - are the lights on?
+#     Visited         - have we been here before?
+#     DescNdx         - index of relevant entry in description array
+#     ItemList        - index of item list in item list array

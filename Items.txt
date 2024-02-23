@@ -1,0 +1,82 @@
+Items:
+
+	Armor: Price and Specs
+		Leather Armor:
+			Helmet(50 gold): 1pt
+			Chestplate(75 gold): 3pts
+			Leggings(65 gold): 2pts
+			Boots(60 gold): 1pt
+			Total: 7pts
+		
+		Chainmail Armor:
+			Helmet(65 gold): 2pts
+			Chestplate(85 gold): 5pts
+			Leggings(75 gold): 3pts
+			Boots(70 gold): 2pts
+			Total: 12pts
+
+		Bronze Armor:
+			Helmet(80 gold): 4pts
+			Chestplate(105 gold): 7pts
+			Leggings(95 gold): 5pts
+			Boots(90 gold): 4pts
+			Total: 20pts
+		
+		Iron Armor
+			Helmet(100 gold): 7pts
+			Chestplate(120 gold): 12pts
+			Leggings(110 gold): 10pts
+			Boots(105 gold): 7pts
+			Total: 36pts
+
+		Dragon Scale Armor:
+			Helmet(150 gold): 13pts
+			Chestplate(200 gold): 18pts
+			Leggings(175 gold): 16pt
+			Boots(150 gold): 13pts
+			Total: 60pts
+
+	Weapons: Price and Specs
+		(Starter) Rusty Butterknife(Free): 0.5x damage multiplier
+		Rusty Longsword(30 gold): 1x damage multiplier
+		Bronze Dagger(55 gold): 1.2x damage multiplier
+		Bronze Sword(70 gold): 1.5x damage multiplier
+		Iron Dagger(90 gold): 1.8x damage multiplier
+		Iron Sword(100 gold): 2x damage multiplier
+		Goblin Cleaver(Great Axe)(150 gold): 2.5x damage multipler
+		Dragon's Bane(Great Sword)(200 gold): 3x damage multiplier
+
+	Heals and Buffs: Price and Specs
+		Basic Bandage(10 gold)(Max: 5): +5hp
+		Healing Draught[Tier 1] (20 gold)(Max: 3): +10hp
+		Power Potion[Tier 1](20 gold)(Max: 3)(60s): +1x damage multiplier
+		Healing Draught[Tier 2](30 gold)(Max: 3): +15hp
+		Power Potion[Tier 2](30 gold)(Max: 3)(120s): +2x damage multiplier
+		Healing Draught[Tier 3](50 gold)(Max: 3): +20hp
+		Power Potion[Tier 3](50 gold)(Max: 3)(240s): +3x damage multiplier
+
+	Spells: Price and Definition
+	    Passive:
+		Return To Village(80 gold)(Max: 1): Returns you to the village.
+		Scan(30 gold)(Max: 3): Scans current room for any traps.
+		Disarm(20 gold)(Max: 3): Can be used after the "Scan" spell to disarm any discovered traps.
+		
+	    Offensive:
+		Fireball[Tier 1](30 gold)(Max: 5): 15dp
+		Fireball[Tier 2](60 gold)(Max: 5): 25dp
+		Fireball[Tier 3](90 gold)(Max: 5): 35dp
+		Lightning Bolt[Tier 1](30 gold)(Max: 5): 15dp
+		Lightning Bolt[Tier 2](60 gold)(Max: 5): 25dp
+		Lightning Bolt[Tier 3](90 gold)(Max: 5): 35dp
+		Wrath of Nature[Tier 1](30 gold)(Max: 5): 15dp
+		Wrath of Nature[Tier 2](60 gold)(Max: 5): 25dp
+ 		Wrath of Nature[Tier 3](90 gold)(Max: 5): 35dp
+
+	Lucky Ring(850 Gold)(Max: 1): +10% chance of items spawning in chest
+	(once 1 is collected, set chance of spawning to 0)
+	
+	Invisibility Ring(450 gold)(Max: 1): 2 minutes of invisibility followed by 5 minutes of cooldown.
+
+	Power Ring(450 gold)(Max: 1):
+
+	Defense Ring(450 gold)(Max: 1)

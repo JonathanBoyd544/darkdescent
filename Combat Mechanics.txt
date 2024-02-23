@@ -1,0 +1,35 @@
+Combat Mechanics:
+	Combat roll number range (Player and Monsters):
+		Level 1: 5-10
+		Level 2: 10-20
+		Level 3: 15-40
+
+	Monsters:
+		Goblin(Level 1): 0.75x damage multiplier | 30hp
+		Goblin(Level 2): 1x damage multiplier | 45hp
+		Goblin(Level 3): 1.5x damage multiplier | 55hp
+
+		Troll(Level 1): 0.75x damage multiplier | 45hp
+		Troll(Level 2): 1x damage multiplier | 55hp
+		Troll(Level 3): 1.5x damage multiplier | 70hp
+
+		Giant Spider(Level 1): 0.75x damage multiplier | 25hp
+		Giant Spider(Level 2): 1x damage multiplier | 40hp
+		Giant Spider(Level 3): 1.5x damage multiplier | 50hp
+
+		Bugbear(Level 1): 0.75x damage multiplier | 35hp
+		Bugbear(Level 2): 1x damage multiplier | 50hp
+		Bugbear(Level 3): 1.5x damage multiplier | 60hp
+
+		Skeleton Mage(Boss): 2x damage multiplier | 200hp
+
+ 	Scenario:
+		You have 100 hp to start. You have a full set of chainmail armor equipped, so you have a total
+		112hp. You have the Bronze Sword equipped so you have a 1.5x damage multiplier. You are on level 2 so the roll range is 10-20. 
+		You enter a room, and there is a tier 2 troll waiting. If the troll is facing away from you, you get first hit or you can exit the room. 
+		If the troll is facing you, the program generates a random number between 1 and 2. If it outputs 1, the enemy gets first attack. if it outputs 2,
+		you get first attack. Lets say the troll is facing you. you roll a 2. You can choose to attack with your sword, or cast a spell. You can choose to 
+		attack high, middle or low. You attack high. the troll guards middle. your attack lands. you roll between 10 and 20. you roll a 14. with your current
+		damage multiplier of 1.5 from your sword, you hit the troll for 21 damage. the troll now has 31 hp left. it is the trolls turn now. you can choose to 
+		defend high middle or low. you choose high. the troll attacks low. It is a level 2 troll so it has a damage multiplier of 1x. It rolls a 17. it deals 
+		17 damage tou you. you now have 95hp.

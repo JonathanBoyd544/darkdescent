@@ -1,0 +1,47 @@
+Actions
+
+a  - attack
+b  - block (top | mid | bot>
+c  - 
+d  - down
+dr - drop <item list | all>
+e  - east
+f  - flee
+g  - gold
+h  - help
+i  - inventory
+j  - 
+k  - 
+l  - look
+m  - 
+n  - north
+o  - open
+p  - 
+q  - quit
+r  - 
+s  - south
+t  - take <item list | all>
+u  - up
+us - use <item>
+v  - 
+w  - west
+wi - wield <weapon>
+x  - 
+y  - 
+z  - 
+0  - 
+1  - 
+2  - 
+3  - 
+4  - 
+5  - 
+6  - 
+7  - 
+8  - 
+9  - 
+,  - 
+.  - 
+/  - 
+=  - 
+
+

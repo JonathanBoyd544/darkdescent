@@ -1,0 +1,45 @@
+Static decorations
+	table
+	chair
+	<stone, straw, feather, canopy, broken, unmade> bed
+	<color> rug
+	fountain
+	sculpture (bugbear; goblin; troll; spider; skeleton mage; tall, beautiful woman wielding a large axe)
+
+
+
+Active items
+	display case (potions, spells, rings, weapons, aromor, ...)
+	storage chest
+	small chest
+	large chest
+	backpack
+	lamp
+
+
+Probablity assignments
+	each type of static decoration (round robin generator)
+	large chest present 
+	small chest present (only calculated when no large chest is present)
+	small chest item count (0: 10%, 1: 60%, 2: 30%)
+	large chest item count (0: 5%, 1: 10%, 2: 30%, 3: 40%, 4: 10%, 5: 5%)
+	lamp (20% if the room is not lighted)
+
+
+
+probability function
+
+def prob(probList, rsltList)
+    """
+	The probList has two or more entries, each representing the percentage of time that this result should occur; the total must sum to 100.
+	The result list is integer or text value to return when the calculated probablity falls in each bucket.
+
+	calculate probability 0..1
+	cutoff = 0
+	loop through rsltList
+		cutoff = cutoff + probList[ndx] / 10
+		if probablity <= cutoff:
+			return rsltList[ndx]
+	if you get here, something went terribly wrong!
+
+    """

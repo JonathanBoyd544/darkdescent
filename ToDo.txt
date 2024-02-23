@@ -1,0 +1,25 @@
+Jon ==========================================================================
+
+Define chests, contents, action commands, etc.
+
+
+Dan ===========================================================================
+
+take
+
+drop
+
+inventory
+
+
+ToDone:
+-------
+Implement Look command.
+
+Parse and store long and short descriptions.
+
+Add status flag for each room to indicate that the room has already been visited; 
+	if this is the first time the room has been seen, show long description; 
+	if already visited, show short description.  
+	Long description can be viewed at any time by issuing Look command.
+

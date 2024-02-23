@@ -1,0 +1,87 @@
+Level 1:
+	Small chest(5% chance):
+		Basic Bandage(10% chance)(0-2)
+		Healing Draught[Tier 1](5% chance)(0-1)
+		Power Potion[Tier 1](5% chance)(0-1)
+		Fireball Spell[Tier 1](5% chance)(0-1)
+		Ligntning Bolt Spell[Tier 1](5% chance)(0-1)
+		Wrath of Nature Spell[Tier 1](5% chance)(0-1)
+		Gold(15% chance)(5-15)
+
+	Large Chest(2.5% chance):
+		Rusty Longsword(5% chance)(0-1)
+		Leather Helmet(5% chance)(0-1)
+		Leather Chestplate(5% chance)(0-1)
+		Leather Leggings(5% chance)(0-1)
+		Leather Boots(5% chance)(0-1)
+		Basic Bandage(5% chance)(0-2)
+		Healing Draught[Tier 1](5% chance)(0-1)
+		Power Potion[Tier 1](5% chance)(0-1)
+		Fireball Spell[Tier 1](5% chance)(0-1)
+		Ligntning Bolt Spell[Tier 1](5% chance)(0-1)
+		Wrath of Nature Spell[Tier 1](5% chance)(0-1)
+		Gold(15% chance)(10-25)
+		Lucky ring(0.5% chance)(0-1)		
+
+Level 2:
+	Small chest(5% chance):
+		Basic Bandage(10% chance)(0-2)
+		Healing Draught[Tier 2](5% chance)(0-1)
+		Power Potion[Tier 2](5% chance)(0-1)
+		Fireball Spell[Tier 2](5% chance)(0-1)
+		Ligntning Bolt Spell[Tier 2](5% chance)(0-1)
+		Wrath of Nature Spell[Tier 2](5% chance)(0-1)
+		Gold(15% chance)(10-25)
+
+	Large Chest(2.5% chance):
+		Bronze Dagger(5% chance)(0-1)
+		Bronze Sword(3% chance)(0-1)
+		Chainmail Helmet(5% chance)(0-1)
+		Chainmail Chestplate(5% chance)(0-1)
+		Chainmail Leggings(5% chance)(0-1)
+		Chainmail Boots(5% chance)(0-1)
+		Bronze Helmet(5% chance)(0-1)
+		Bronze Chestplate(5% chance)(0-1)
+		Bronze Leggings(5% chance)(0-1)
+		Bronze Boots(5% chance)(0-1)
+		Basic Bandage(5% chance)(0-2)
+		Healing Draught[Tier 1](5% chance)(0-1)
+		Power Potion[Tier 1](5% chance)(0-1)
+		Fireball Spell[Tier 1](5% chance)(0-1)
+		Ligntning Bolt Spell[Tier 1](5% chance)(0-1)
+		Wrath of Nature Spell[Tier 1](5% chance)(0-1)
+		Gold(15% chance)(20-35)
+		Lucky ring(0.5% chance)(0-1)		
+
+
+Level 3:
+	Small chest(5% chance):
+		Basic Bandage(10% chance)(0-2)
+		Healing Draught[Tier 3](5% chance)(0-1)
+		Power Potion[Tier 3](5% chance)(0-1)
+		Fireball Spell[Tier 3](5% chance)(0-1)
+		Ligntning Bolt Spell[Tier 3](5% chance)(0-1)
+		Wrath of Nature Spell[Tier 3](5% chance)(0-1)
+		Gold(15% chance)(20-35)
+
+	Large Chest(2.5% chance):
+		Iron Dagger(5% chance)(0-1)
+		Iron Sword(3% chance)(0-1)
+		Bronze Helmet(5% chance)(0-1)
+		Bronze Chestplate(5% chance)(0-1)
+		Bronze Leggings(5% chance)(0-1)
+		Bronze Boots(5% chance)(0-1)
+		Iron Helmet(5% chance)(0-1)
+		Iron Chestplate(5% chance)(0-1)
+		Iron Leggings(5% chance)(0-1)
+		Iron Boots(5% chance)(0-1)
+		Basic Bandage(5% chance)(0-2)
+		Healing Draught[Tier 3](5% chance)(0-1)
+		Power Potion[Tier 3](5% chance)(0-1)
+		Fireball Spell[Tier 3](5% chance)(0-1)
+		Ligntning Bolt Spell[Tier 3](5% chance)(0-1)
+		Wrath of Nature Spell[Tier 3](5% chance)(0-1)
+		Gold(15% chance)(40-55)
+		Lucky ring(0.2% chance)(0-1)		
+	
+		
