@@ -58,8 +58,7 @@ Items:
 	Spells: Price and Definition
 	    Passive:
 		Return To Village(80 gold)(Max: 1): Returns you to the village.
-		Scan(30 gold)(Max: 3): Scans current room for any traps.
-		Disarm(20 gold)(Max: 3): Can be used after the "Scan" spell to disarm any discovered traps.
+		Disarm(20 gold)(Max: 3): Scan current room for any traps and disarm if found.
 		
 	    Offensive:
 		Fireball[Tier 1](30 gold)(Max: 5): 15dp
