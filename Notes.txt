@@ -2,7 +2,7 @@ Labyrinth's Edge:
 
 Start player in house in village. 
 House has chest with gate key which unlocks dungeon gate.
-Key dissapears after use and gate remains unlocked.
+Key disappears after use and gate remains unlocked.
 
 The full playing space is defined by 1 - 1000 levels.
 Each level is a rectangular grid of spaces in columns and rows (up to 1000 columns and 1000 rows).
@@ -12,17 +12,17 @@ The initial (demo) game will be 4 levels.
 Each level will be a 9 x 9 grid (9 columns, 9 rows). The levels increase in difficulty as you go lower.
 The levels consist of a village (level 0), level 1, level 2, and level 3.
 
-The village has a Armory shop, Magic shop, personal house, and entrance to dungeon.
+The village has an Armory shop, Magic shop, personal house, and entrance to the dungeon.
 Level 1 has a grid of equal sized rooms each connecting to a hallway on all sides.
-Level 2 has a grid of equal sized rooms, some dont have hallways on all sides.
-Level 3 has a grid of equal sized rooms, some dont have hallways on all sides.
+Level 2 has a grid of equal sized rooms, some don't have hallways on all sides.
+Level 3 has a grid of equal sized rooms, some don't have hallways on all sides.
 
-All rooms have the possibility of having a small or large chest, 1-4 doors, up/down stairs, a monster, a center piece(such as a table or fountain), and a trap.
+All rooms have the possibility of having a small or large chest (with or without a trap), 1-4 doors, up/down stairs, a monster, a center piece(such as a table or fountain).
 All hallways have the possibility of having 1-4 doors, stairs, and a monster.
 
-The directions that you can travel consist of North(n), East(e), South(s), West(w), Up(u), and Down(d).
+The directions that you can travel consist of North(n), East(e), South(s), West(w), Up(up), and Down(do).
 
-Actions include: Take (t), Drop (d), Open (o), Use (u), Look [<item>] (l), Inventory (i), Wallet (w), Flee (f) (if it is your turn to attack), Attack (a) - roll dice for damage dealt, 
+Actions include: Take (t), Drop (d), Open (o), Use (u), Look [<item>] (l), Inventory (i), Flee (f) (if it is your turn to attack), Attack (a) - roll dice for damage dealt, 
 Block [Top, Mid, Bot] (b).  Monsters will attack one of these. If you block wrong, damage is dealt. If you succeed, no damage is dealt., Help (h).
 
 There will be red, green, and black keys. You will find red keys only on the first level. Green keys on the second level. And the red, green, and black keys on the 3rd level.
@@ -40,7 +40,7 @@ The software will also allow the creation of blue keys which can be used on blue
 
 The black key will be hidden in a chest somewhere on the third level. This key will unlock the boss room door, also located on the third level.
 
-Your inventory will consist of 10 item slots plus 5 spell slots and 5 potion slots. Your equipment will consist of head, body, legs, feet, and weapon slots. Your wallet is infinite.
+Your inventory will consist of 15 item slots plus 5 spell slots and 5 potion slots. Your equipment will consist of head, body, legs, feet, and weapon slots. Your wallet is infinite.
 
 Potions take up your current turn if engaged in combat and can only be used when it is your turn.
 
@@ -52,7 +52,7 @@ you choose to look at note and see that it has B7 wittten on it. You will input 
 
 During your turn, the game will tell you the name of the monster, how much hp it has, and give you your options
     for example:
-        It is your turn. The goblin has 13hp. Use spell(sp), or attack high(h), middle(m), or low(l)
+        It is your turn. The goblin has 13hp. Use spell(sp), or attack <hml> (high, middle, low)
 if use spell(sp): the game list the spells currently in your inventory.
     for example:
         Your equipped spells:
@@ -60,12 +60,19 @@ if use spell(sp): the game list the spells currently in your inventory.
             2) lightning bolt[tier 1][x3]
             3) lightning bolt[tier 3][x1]
             4) wrath of nature[tier 2][x2]
-    based on this example the user can input a number 1-4 to cast that coresponding spell.
+    based on this example the user can input a number 1-4 to cast that corresponding spell.
 otherwise the user can type h, m, or l to attack high, middle, or low.
 
 during the enemy's turn, the game will tell the user their current hp, and prompt them to block high(h), middle(m), or low(l)
     for example:
-        It is the goblin's turn. You have 75hp. The goblin is attacking. Block high(h), middle(m) or low(l)
+        It is the goblin's turn. You have 75hp. The goblin is attacking. Block <hml> (high, middle, low)
             the user will then type h, m, or l to block high middle or low
     
-    
+traps (on chests) when activated use a RNG to determine if the trap was effective or evaded.  Armor reduces trap damage.
+
+Player attributes:
+Level: (0 - 5) - defines a multiplier applied to Health and Damage. Combat victories and Discoveries increase level points by a small increment; each level will require a specific number of level points to achieve that level.
+Health
+Damage (defined by weapon)
+
+
