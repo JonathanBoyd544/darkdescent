@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-import numpy
-import os
-import sys
-
 """
 Read and process configuration files for labyrinth.
 
@@ -19,54 +15,13 @@ Done:
     Not much yet. 
 """
 
+import os
+import sys
+
 import random
 import numpy as np
 from configparser import ConfigParser
 
-
-##### Title Screen #####
-def title_screen_selections():
-    option = input(">> ").lower()
-    if option == ("play"):
-        print()
-        main()
-    elif option == ("help"):
-        help_menu()
-    elif option == ("quit"):
-        sys.exit()
-    while option not in ['play', 'help', 'quit']:
-        print("Invalid command. Please try again.")
-        option = input(">> ")
-        if option == ("play"):
-            print()
-            main()
-        elif option == ("help"):
-            help_menu()
-        elif option == ("quit"):
-            sys.exit()
-            
-def title_screen():     
-    os.system('cls')
-    print("##############################")
-    print("###### Labyrinth's Edge ######")
-    print("##############################")
-    print("           -Play-            ")
-    print("           -Help-            ")
-    print("           -Quit-            ")
-    print("Copyright © 2024 JB Productions")
-    print("")
-    title_screen_selections()
-
-def help_menu():
-    os.system('cls')
-    print("Insert help text here.")
-    print("Press ENTER to return to main menu.")
-    option = input(" ").lower
-    if option == (" "):
-        title_screen()
-             
-    else:
-        title_screen()
 
 verbosity = 6
 
@@ -119,8 +74,6 @@ fldcnt = -1
 # game_version = ""
 # game_fnameprefix = ""
 
-spcs = np.arange(1)
-
 class Game:
     name = "Generic"
     context = "Test"
@@ -146,6 +99,31 @@ class Game:
         print()
 
 game = Game()
+
+levels = []
+
+action_dict = {
+    "attack":       "a",
+    "block":        "b",
+    "drop":         "d",
+    "down":         "do",
+    "east":         "e",
+    "flee":         "f",
+    "help":         "h",
+    "inventory":    "i",
+    "look":         "l",
+    "north":        "n",
+    "open":         "o",
+    "quit":         "q",
+    "south":        "s",
+    "take":         "t",
+    "use":          "u",
+    "up":           "up",
+    "west":         "w",
+    "wield":        "wi",
+    }
+
+path_dict = { }
 
 armor_items = [
     "Leather Helmet", "Leather Chestplate", "Leather Leggings", "Leather Boots", 
@@ -176,7 +154,8 @@ ring_items = [
 item_lists = [[],
               ["Leather Boots+", "Rusty Butterknife"],
               [],
-              ["Atomic Bomb", "ice-cream cone", "red dress"],
+              # ["Atomic Bomb", "ice-cream cone", "red dress", "Hammer of Thor"],
+              [],
               [],
               ["Leather Chestpiece", "Leather Leggings+"],
               ["Leather Leggings+", "Power Ring"],
@@ -277,6 +256,7 @@ room_descs = [
     "in a room with an elaborate, if slightly malfunctioning, mechanism that seems to serve no purpose, except to occasionally spray unsuspecting adventurers with water.|in the eloborate mechanism room.",
     "in a space adorned with peculiar, comically exaggerated portraits of historical figures, all with added mustaches and pirate hats.|in the portrait space.",
     "in a chamber with an inexplicably misplaced window, offering a view of an alien landscape, complete with a sign that says \"No admittance to the dungeon moon, please use your imagination responsibly.\"|in an alien landscape.",
+    "in a new dimension not just of sight and sound, but of mind; unfortunately you recently lost your mind and can't remember where you left it.|in the Twilight Zone.",
     "in a dimly lit room with a series of peculiar, if slightly unnerving, taxidermy displays of mythical creatures, all wearing name tags that say \"Frank the Friendly Dragon\" and \"Barry the Bashful Basilisk.\"|in the taxidermy room.",
     "in a cluttered space filled with forgotten odds and ends, hinting at past inhabitants, including a diary that reads, \"Day 248: Still lost in this confusing dungeon. Send snacks.\"|in the odds-and-ends room."
 ]
@@ -311,6 +291,67 @@ fixed_descs = [
 #     print("file prefix: {}".format(game_fnameprefix))
 #     print()
 
+def print_error(txt):
+    # ESC = '\x1b'
+    print('\x1b[41m' + txt + '\x1b[0m')
+    # print(ESC + '[42m' + txt + ESC + '[0m')
+    # print(ESC + '[43m' + txt + ESC + '[0m')
+    # print(ESC + '[44m' + txt + ESC + '[0m')
+    # print(ESC + '[45m' + txt + ESC + '[0m')
+    # print(ESC + '[46m' + txt + ESC + '[0m')
+    # print(ESC + '[47m' + txt + ESC + '[0m')
+    # print()    
+    # print(ESC + '[101m' + txt + ESC + '[0m')
+    # print(ESC + '[102m' + txt + ESC + '[0m')
+    # print(ESC + '[103m' + txt + ESC + '[0m')
+    # print(ESC + '[104m' + txt + ESC + '[0m')
+    # print(ESC + '[105m' + txt + ESC + '[0m')
+    # print(ESC + '[106m' + txt + ESC + '[0m')
+    # print(ESC + '[107m' + txt + ESC + '[0m')
+
+def print_warning(txt):
+    # ESC = '\x1b'
+    print('\x1b[44m' + txt + '\x1b[0m')
+
+##### Title Screen #####
+def title_screen_selections():
+    while True:
+        option = input(">> ").lower()
+        if "play".startswith(option):
+            print()
+            main()
+            return
+        elif "help".startswith(option):
+            help_menu()
+            return
+        elif "quit".startswith(option):
+            sys.exit()
+            return
+        print("Invalid choice. Please try again. (""Play"", ""Help"", ""Quit"")")
+            
+def title_screen():     
+    os.system('cls')
+    print("##############################")
+    print("###### Labyrinth's Edge ######")
+    print("##############################")
+    print("           -Play-            ")
+    print("           -Help-            ")
+    print("           -Quit-            ")
+    print("Copyright © 2024 JB Productions")
+    print("")
+    title_screen_selections()
+
+def help_menu():
+    os.system('cls')
+    print("Insert help text here.")
+    print("Press ENTER to return to main menu.")
+    option = input(" ").lower
+    if (" ").startswith(option):
+        title_screen()
+             
+    else:
+        title_screen()
+
 def analyze_level(lvlnum):
     global rowcnt
     global colcnt
@@ -320,8 +361,9 @@ def analyze_level(lvlnum):
     maxrows = 0
     maxcols = 0
     valuecnt = 0
+    rslt = (0, 0, 0)
 
-    with open("{}{}.csv".format(game.fnameprefix,lvlnum), 'r') as lvl:
+    with open("{}{:0>3d}.csv".format(game.fnameprefix,lvlnum), 'r') as lvl:
         line = lvl.readline().strip()   # skip header row
         while line:
             line = lvl.readline().strip()
@@ -364,10 +406,11 @@ def analyze_level(lvlnum):
     rowcnt = maxrows
     colcnt = maxcols
     fldcnt = valuecnt - 3   # -3: lvl,col,row values are not included in field cnt
+    rslt = (colcnt, rowcnt, fldcnt)
     if verbosity > 5:
-        print("row cnt: {}".format(rowcnt))
-        print("col cnt: {}".format(colcnt))
-        print("fld cnt: {}".format(fldcnt))        
+        print("analyze: row cnt: {}, col cnt: {}, fld cnt: {}".format(rowcnt, colcnt, fldcnt))
+
+    return rslt
 
 def get_dest_prompt(lvl, col, row):
     # global spcs
@@ -385,23 +428,23 @@ def get_dest_prompt(lvl, col, row):
     #         print("There is {} {}.".format(article, item))
         
     door_list = []
-    if spcs[lvl, col, row, F_DESTN] > -1:
+    if levels[lvl][col, row, F_DESTN] > -1:
         door_list.append("north")
-    if spcs[lvl,col,row,F_DESTS] > -1:
+    if levels[lvl][col,row,F_DESTS] > -1:
         door_list.append("south")
-    if spcs[lvl,col,row,F_DESTE] > -1:
+    if levels[lvl][col,row,F_DESTE] > -1:
         door_list.append("east")
-    if spcs[lvl,col,row,F_DESTW] > -1:
+    if levels[lvl][col,row,F_DESTW] > -1:
         door_list.append("west")
 
     stair_list = []
-    if spcs[lvl, col, row, F_DESTUP] > -1:
+    if levels[lvl][col, row, F_DESTUP] > -1:
         stair_list.append("up")
-    if spcs[lvl,col,row,F_DESTDOWN] > -1:
+    if levels[lvl][col,row,F_DESTDOWN] > -1:
         stair_list.append("down")
 
     portal_list = []
-    if spcs[lvl, col, row, F_DESTPORTAL] > -1:
+    if levels[lvl][col, row, F_DESTPORTAL] > -1:
         portal_list.append("portal")
 
     for dir in door_list:
@@ -416,14 +459,14 @@ def get_dest_prompt(lvl, col, row):
 def get_items(lvl, col, row):
     prompt = ""
     
-    itemlist_ndx = spcs[lvl, col, row, F_ITEMLIST]
+    itemlist_ndx = levels[lvl][col, row, F_ITEMLIST]
     if itemlist_ndx > 0:
         for item in item_lists[itemlist_ndx]:
             if item[len(item)-1] == "+":
                 verb_clause = "are"
                 item = item[0:len(item)-1]
             else:
-                if item[0] in ["a", "A", "e", "E", "i", "I", "o", "O", "u", "U"]:
+                if item[0].lower() in ["a", "e", "h", "i", "o", "u"]:
                     verb_clause = "is an"
                 else:
                     verb_clause = "is a"
@@ -435,7 +478,10 @@ def get_items(lvl, col, row):
 
 def get_level(lvlnum):
     linecnt = 0
-    with open("{}{}.csv".format(game.fnameprefix,lvlnum), 'r') as lvl:
+    fname = "{}{:0>3d}.csv".format(game.fnameprefix,lvlnum)
+    if verbosity > 25: print("opening level {}: '{}'".format(lvlnum,fname))
+    with open(fname, 'r') as lvl:
+        if verbosity > 25: print("{} open".format(fname))
         line = lvl.readline().strip()
         while line:
             line = lvl.readline().strip()
@@ -471,18 +517,19 @@ def get_level(lvlnum):
                 spcDesc = rowdata[C_DESCNDX]
             spcItemList = int(rowdata[C_ITEMLIST])
 
-            spcs[spcLvl, spcCol, spcRow, F_TYPE] = spcType
-            spcs[spcLvl, spcCol, spcRow, F_DESTN] = spcDestN
-            spcs[spcLvl, spcCol, spcRow, F_DESTS] = spcDestS
-            spcs[spcLvl, spcCol, spcRow, F_DESTE] = spcDestE
-            spcs[spcLvl, spcCol, spcRow, F_DESTW] = spcDestW
-            spcs[spcLvl, spcCol, spcRow, F_DESTUP] = spcDestUp
-            spcs[spcLvl, spcCol, spcRow, F_DESTDOWN] = spcDestDown
-            spcs[spcLvl, spcCol, spcRow, F_DESTPORTAL] = spcDestPortal
-            spcs[spcLvl, spcCol, spcRow, F_ISLIT] = spcDestLit
-            spcs[spcLvl, spcCol, spcRow, F_VISITED] = spcVisited
-            spcs[spcLvl, spcCol, spcRow, F_DESCNDX] = spcDesc
-            spcs[spcLvl, spcCol, spcRow, F_ITEMLIST] = spcItemList
+            levels[spcLvl][spcCol, spcRow, F_TYPE] = spcType
+            levels[spcLvl][spcCol, spcRow, F_DESTN] = spcDestN
+            levels[spcLvl][spcCol, spcRow, F_DESTS] = spcDestS
+            levels[spcLvl][spcCol, spcRow, F_DESTE] = spcDestE
+            levels[spcLvl][spcCol, spcRow, F_DESTW] = spcDestW
+            levels[spcLvl][spcCol, spcRow, F_DESTUP] = spcDestUp
+            levels[spcLvl][spcCol, spcRow, F_DESTDOWN] = spcDestDown
+            levels[spcLvl][spcCol, spcRow, F_DESTPORTAL] = spcDestPortal
+            levels[spcLvl][spcCol, spcRow, F_ISLIT] = spcDestLit
+            levels[spcLvl][spcCol, spcRow, F_VISITED] = spcVisited
+            levels[spcLvl][spcCol, spcRow, F_DESCNDX] = spcDesc
+            levels[spcLvl][spcCol, spcRow, F_ITEMLIST] = spcItemList
+
 
 def destination(lvl, col, row, dir):
     ndir = 0
@@ -494,14 +541,14 @@ def destination(lvl, col, row, dir):
         ndir = F_DESTE
     elif dir == 'w':
         ndir = F_DESTW
-    elif dir == 'u':
+    elif dir == 'up':
         ndir = F_DESTUP
-    elif dir == 'd':
+    elif dir == 'do':
         ndir = F_DESTDOWN
     else:
         return -1
 
-    return spcs[lvl, col, row, ndir]
+    return levels[lvl][col, row, ndir]
 
 
 def get_lvl(dest):
@@ -516,10 +563,14 @@ def get_col(dest):
 def get_row(dest):
     return int(dest % 1000)
 
+def get_dest_key(lvl, col, row):
+    # return "{}".format(lvl*1000000 + col*1000 + row)
+    return lvl*1000000 + col*1000 + row
+
 def location_txt (lvl, col, row):
-    if spcs[lvl,col,row,F_TYPE] == 1:
+    if levels[lvl][col,row,F_TYPE] == 1:
         spctype = "room"
-    elif spcs[lvl,col,row,F_TYPE] == 2:
+    elif levels[lvl][col,row,F_TYPE] == 2:
         spctype = "hall"
     else:
         spctype = "unk?"
@@ -527,38 +578,38 @@ def location_txt (lvl, col, row):
     return "<{} ({},{},{})>".format(spctype, lvl, col, row)
 
 def look_room(lvl, col, row, full):
-    spcType = spcs[lvl,col,row,F_TYPE]
-    if spcs[lvl,col,row,F_DESCNDX] < 0:
+    spcType = levels[lvl][col,row,F_TYPE]
+    if levels[lvl][col,row,F_DESCNDX] < 0:
         if full:
-            spcs[lvl,col,row,F_VISITED] = 0
-        visited = spcs[lvl,col,row,F_VISITED]
-        desc0 = fixed_descs[-spcs[lvl,col,row,F_DESCNDX]]
+            levels[lvl][col,row,F_VISITED] = 0
+        visited = levels[lvl][col,row,F_VISITED]
+        desc0 = fixed_descs[-levels[lvl][col,row,F_DESCNDX]]
         if visited:
             desc = desc0.split("|")[1]
         else:
             desc = desc0.split("|")[0]
-            spcs[lvl,col,row,F_VISITED] = 1
+            levels[lvl][col,row,F_VISITED] = 1
     else:
         if spcType == 1:
             if full:
-                spcs[lvl,col,row,F_VISITED] = 0
-            visited = spcs[lvl,col,row,F_VISITED]
-            desc0 = room_descs[spcs[lvl,col,row,F_DESCNDX]]
+                levels[lvl][col,row,F_VISITED] = 0
+            visited = levels[lvl][col,row,F_VISITED]
+            desc0 = room_descs[levels[lvl][col,row,F_DESCNDX]]
             if visited:
                 desc = desc0.split("|")[1]
             else:
                 desc = desc0.split("|")[0]
-                spcs[lvl,col,row,F_VISITED] = 1
+                levels[lvl][col,row,F_VISITED] = 1
         else:
             if full:
-                hall_descs[spcs[lvl,col,row,F_VISITED]] = 0
-            visited = spcs[lvl,col,row,F_VISITED]
-            desc0 = hall_descs[spcs[lvl,col,row,F_DESCNDX]]
+                hall_descs[levels[lvl][col,row,F_VISITED]] = 0
+            visited = levels[lvl][col,row,F_VISITED]
+            desc0 = hall_descs[levels[lvl][col,row,F_DESCNDX]]
             if visited:
                 desc = desc0.split("|")[1]
             else:
                 desc = desc0.split("|")[0]
-                spcs[lvl,col,row,F_VISITED] = 1
+                levels[lvl][col,row,F_VISITED] = 1
                 
         if desc == "":
             if spcType == 1:
@@ -574,80 +625,321 @@ def look_room(lvl, col, row, full):
     prompt = get_items(lvl, col, row)
     if prompt > "":
         print(prompt)
+        
+def get_action(prompt):
+    action_cmd = input(prompt).lower()
+    for key in action_dict.keys():
+        if key.startswith(action_cmd):
+            action = action_dict[key]
+            return action
+    return ""
     
 def test_movement():
     lvl = 0
     col = 1
     row = 1
     full = False
-    while (True):
+    while True:
         look_room(lvl, col, row, full)
         full = False
-        action = input(">> ").lower()
-        if action == 'q':
+        action = get_action(">> ")
+        if action == "q":
+            return
             title_screen()
-        if action == 'l':
+            continue
+        if action == "l":
             full = True
             continue
-        if not action in ['n','s','e','w','u','d']:
-            print("Invalid command, try again")
+        if action == "u":
+            print_warning("Nothing to use.")
+            continue
+        if action == "d":
+            print_warning("Nothing to drop.")
+            continue
+        if not action in ['n','s','e','w','up','do']:
+            print_error("Invalid command, try again")
             continue
         dest = destination(lvl, col, row, action)
         if dest < 0:
-            print("You cannot move in that direction")
+            print_warning("You cannot move in that direction")
             continue
         lvl = get_lvl(dest)
         col = get_col(dest)
         row = get_row(dest)
         print("lvl->{}, col->{}, row->{}".format(lvl, col, row))
 
+def check_path_dict(dest):
+    global path_dict
+
+    if dest > -1:
+        if dest in path_dict:
+            path_dict[dest] += 1
+        else:
+            path_dict[dest] = 1
+    
+def update_paths():    
+    for lvl in range(len(levels)):
+        spcs = levels[lvl]
+        shape = np.shape(spcs)
+        cols = shape[0]
+        rows = shape[1]
+        for col in range(cols):
+            for row in range(rows):
+                dest = levels[lvl][col, row, F_DESTN]
+                check_path_dict(dest)
+                dest = levels[lvl][col, row, F_DESTS]
+                check_path_dict(dest)
+                dest = levels[lvl][col, row, F_DESTE]
+                check_path_dict(dest)
+                dest = levels[lvl][col, row, F_DESTW]
+                check_path_dict(dest)
+                dest = levels[lvl][col, row, F_DESTUP]
+                check_path_dict(dest)
+                dest = levels[lvl][col, row, F_DESTDOWN]
+                check_path_dict(dest)
+                dest = levels[lvl][col, row, F_DESTPORTAL]
+                check_path_dict(dest)
+    
+    print("{}".format(path_dict.keys()))
+    
+def check_paths():    
+    for lvl in range(len(levels)):
+        spcs = levels[lvl]
+        shape = np.shape(spcs)
+        cols = shape[0]
+        rows = shape[1]
+        for col in range(cols):
+            for row in range(rows):
+                key = get_dest_key(lvl, col, row)
+                if not key in path_dict:
+                    print("[{},{},{}] :  {} not in path dictionary".format(lvl, col, row, key))
+    
+    
+    
+def print_map(lvl):
+    shape = np.shape(levels[lvl])
+    cols = shape[0]
+    rows = shape[1]
+    # flds = shape[2]
+    desc = ["", ""]
+    for row in range(rows):
+        separatortxt = "+"
+        toptxt = "|"
+        desctxt0 = "|"
+        desctxt1 = "|"
+        lvltxt = "|"
+        coltxt = "|"
+        rowtxt = "|"
+        bottxt = "|"
+        
+        # "{}{:0>3d}.csv".format(game.fnameprefix,levelcnt)
+        
+        for col in range(cols):
+            active = get_dest_key(lvl, col, row) in path_dict
+
+            spcType = levels[lvl][col,row,F_TYPE]
+            if not active:
+                if spcType == 1:
+                    desc1 = "unused room"
+                else:
+                    desc1 = "unused hallway"
+            else:
+                if levels[lvl][col,row,F_DESCNDX] < 0:
+                    desc0 = fixed_descs[-levels[lvl][col,row,F_DESCNDX]]
+                    desc1 = desc0.split("|")[1].replace(".", "").replace("-", " ").rstrip()
+                else:
+                    if spcType == 1:
+                        desc0 = room_descs[levels[lvl][col,row,F_DESCNDX]]
+                        desc1 = desc0.split("|")[1].replace(".", "").replace("-", " ").rstrip()
+                    else:
+                        desc0 = hall_descs[levels[lvl][col,row,F_DESCNDX]]
+                        desc1 = desc0.split("|")[1].replace(".", "").replace("-", " ").rstrip()
+                            
+                    if desc1 == "":
+                        if spcType == 1:
+                            desc1 = "unknown room"
+                        else:
+                            desc1 = "unknown hallway"
+
+            desc2 = desc1.split(" ")
+            if len(desc2) < 2:
+                desc[0] = desc2
+                desc[1] = ""
+            else:
+                desc[0] = desc2[len(desc2)-2]
+                if len(desc[0]) > 7:
+                    desc[0] = desc[0][0:7]
+                desc[1] = desc2[len(desc2)-1]
+                if len(desc[1]) > 7:
+                    desc[1] = desc[1][0:7]
+            # print("'{}'  -->  '{}' - '{}'".format(desc1, desc[0], desc[1]))
+
+            separatortxt += "-------+"
+            
+            itemlist_ndx = levels[lvl][col, row, F_ITEMLIST]
+            if itemlist_ndx > 0:
+                itemcnt = len(item_lists[itemlist_ndx])
+            else:
+                itemcnt = 0
+            
+            if levels[lvl][col, row, F_DESTN] > -1:
+                ndoor = "^"
+            else:
+                ndoor = " "
+
+            if levels[lvl][col, row, F_DESTUP] > -1:
+                upstairs = "/"
+            else:
+                upstairs = " "
+                
+            if levels[lvl][col, row, F_ISLIT]:
+                islit = "*"
+            else:
+                islit = " "
+
+            toptxt += "{:2d} {}{} {}|".format(itemcnt, ndoor, upstairs, islit)
+            
+
+            if levels[lvl][col, row, F_DESTUP] > -1:
+                upstairs = "/"
+            else:
+                upstairs = " "
+            if levels[lvl][col,row,F_DESTDOWN] > -1:
+                downstairs = "\\"
+            else:
+                downstairs = " "
+            portal_list = []
+            if levels[lvl][col, row, F_DESTPORTAL] > -1:
+                portal_list.append("portal")
+            
+            # levels[lvl][col,row,F_DESTN],
+            # levels[lvl][col,row,F_DESTS],
+            # levels[lvl][col,row,F_DESTE],
+            # levels[lvl][col,row,F_DESTW],
+            # levels[lvl][col,row,F_DESTUP],
+            # levels[lvl][col,row,F_DESTDOWN],
+            # levels[lvl][col,row,F_DESTPORTAL],
+            # levels[lvl][col,row,F_ISLIT],
+
+            
+            desctxt0 += "{:7s}|".format(desc[0])
+            desctxt1 += "{:7s}|".format(desc[1])
+            
+            if levels[lvl][col,row,F_DESTS] > -1:
+                sdoor = "v"
+            else:
+                sdoor = " "
+            if levels[lvl][col,row,F_DESTE] > -1:
+                edoor = ">"
+            else:
+                edoor = " "
+            if levels[lvl][col,row,F_DESTW] > -1:
+                wdoor = "<"
+            else:
+                wdoor = " "
+        
+            lvltxt += "  {:0>3d}  |".format(lvl)
+            coltxt += "{} {:0>3d} {}|".format(wdoor, col, edoor)
+            rowtxt += "  {:0>3d}  |".format(row)
+
+            if levels[lvl][col, row, F_DESTPORTAL] > -1:
+                portal = "@"
+            else:
+                portal = " "
+            
+            if levels[lvl][col, row, F_TYPE] == 1:
+                spctype = "R"
+            else:
+                spctype = "H"
+            
+            bottxt += "  {}{}{} {}|".format(portal, sdoor, downstairs, spctype)
+            
+        print(separatortxt)
+        print(toptxt)
+        print(desctxt0)
+        print(desctxt1)
+        print(lvltxt)
+        print(coltxt)
+        print(rowtxt)
+        print(bottxt)
+
+    print(separatortxt)
 
 def main():
-    global spcs
-
     # config_init()
 
-    analyze_level(0)
-
-    analyze_level(1)
-
-    spcs = np.arange(lvlcnt * colcnt * rowcnt * fldcnt).reshape((lvlcnt,colcnt,rowcnt,fldcnt))
-    if verbosity > 5:
-        print("total array elements: {}, arranged as {} lvls x {} cols x {} rows x {} flds".format(np.size(spcs), lvlcnt, colcnt, rowcnt, fldcnt))
+    levelcnt = 0
+    while os.path.isfile("{}{:0>3d}.csv".format(game.fnameprefix,levelcnt)):
+        rslt = analyze_level(levelcnt)
+        cols = rslt[0]
+        rows = rslt[1]
+        flds = rslt[2]
         
-    get_level(0)
+        spcs = np.arange(cols * rows * flds).reshape((cols,rows,flds))
+        levels.append(spcs)
+        if verbosity > 5:
+            print("level {} array elements: {}, arranged as {} cols x {} rows x {} flds".format(levelcnt, np.size(spcs), cols, rows, flds))
+        print()
+        levelcnt += 1
+        
+    print("{} levels found".format(levelcnt))
+    for lvlnum in range(levelcnt):
+        spcs = levels[lvlnum]
+        if verbosity > 5:
+            shape = np.shape(spcs)
+            if verbosity > 25: print("spcs.shape: {}".format(shape))
+            print("level {} array: {} elements, arranged as {} cols x {} rows x {} flds".format(lvlnum, np.size(spcs), shape[0], shape[1], shape[2]))
+    print()
 
-    get_level(1)
+    for lvlnum in range(levelcnt):
+        get_level(lvlnum)
+        
+    # sys.exit()
 
-    if verbosity > 5:
-        for lvl in range(4):
-            for col in range(9):
-                for row in range(9):
+    if verbosity > 25:
+        for lvl in range(levelcnt):
+            shape = np.shape(levels[lvl])
+            # if verbosity > 25: print("spcs.shape: {}".format(shape))
+            for col in range(shape[0]):
+                for row in range(shape[1]):
                     print("l:{} c:{} r:{} = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}".format(lvl, col, row, 
-                                                                                                    spcs[lvl,col,row,F_TYPE],
-                                                                                                    spcs[lvl,col,row,F_DESTN],
-                                                                                                    spcs[lvl,col,row,F_DESTS],
-                                                                                                    spcs[lvl,col,row,F_DESTE],
-                                                                                                    spcs[lvl,col,row,F_DESTW],
-                                                                                                    spcs[lvl,col,row,F_DESTUP],
-                                                                                                    spcs[lvl,col,row,F_DESTDOWN],
-                                                                                                    spcs[lvl,col,row,F_DESTPORTAL],
-                                                                                                    spcs[lvl,col,row,F_ISLIT],
-                                                                                                    spcs[lvl,col,row,F_VISITED],
-                                                                                                    spcs[lvl,col,row,F_DESCNDX],
-                                                                                                    spcs[lvl,col,row,F_ITEMLIST]
+                                                                                                    levels[lvl][col,row,F_TYPE],
+                                                                                                    levels[lvl][col,row,F_DESTN],
+                                                                                                    levels[lvl][col,row,F_DESTS],
+                                                                                                    levels[lvl][col,row,F_DESTE],
+                                                                                                    levels[lvl][col,row,F_DESTW],
+                                                                                                    levels[lvl][col,row,F_DESTUP],
+                                                                                                    levels[lvl][col,row,F_DESTDOWN],
+                                                                                                    levels[lvl][col,row,F_DESTPORTAL],
+                                                                                                    levels[lvl][col,row,F_ISLIT],
+                                                                                                    levels[lvl][col,row,F_VISITED],
+                                                                                                    levels[lvl][col,row,F_DESCNDX],
+                                                                                                    levels[lvl][col,row,F_ITEMLIST]
                                                                                                     ))
 
-    print("len(room_descs): {},  len(hall_descs): {}".format(len(room_descs), len(hall_descs)))
+    if False:
+        print("len(room_descs): {},  len(hall_descs): {}".format(len(room_descs), len(hall_descs)))
 
+        update_paths()
+        check_paths()
+            
+        print_map(0)
+        print()
+        print_map(1)
+        print()
+        print_map(2)
+        print()
+        print_map(3)
+    
+        sys.exit()
+    
     test_movement()
 
 if __name__ == '__main__':
-    title_screen()
+    # title_screen()
 
-#     print()
-
-#     main()
+    # print()
+    main()
 
 
     if verbosity > 5:
