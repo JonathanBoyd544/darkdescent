@@ -1,0 +1,48 @@
+
+Lightning spell stun effect
+"The crackling lightning spell strikes the enemy, leaving them momentarily paralyzed and unable to act."
+"A surge of electrical energy envelops the enemy, causing them to freeze in place as the lightning courses through their body."
+"The enemy is temporarily stunned as the lightning spell surges through them, leaving them dazed and disoriented."
+"The powerful jolt of lightning leaves the enemy incapacitated, unable to react as they recover from the shock."
+"The enemy is momentarily immobilized by the electrifying effect of the lightning spell, giving you a momentary advantage in battle."
+"The lightning spell leaves the enemy stunned and unable to counterattack, buying you some valuable time to reposition and strategize."
+
+Lightning spell damage only effect
+"The enemy is struck by a powerful bolt of lightning, leaving them scorched and smoldering from the electrical blast."
+"A surge of crackling energy engulfs the enemy, causing them to writhe in pain as the lightning spell inflicts substantial damage."
+"The enemy is engulfed in a blinding flash of lightning, their body convulsing from the intense electrical shock."
+"The lightning spell courses through the enemy, leaving them singed and weakened by the electrifying attack."
+"The enemy is struck by a fierce bolt of lightning, their body jerking from the force of the electrical strike."
+"The crackling lightning spell surges through the enemy, leaving them visibly weakened and reeling from the powerful electrical assault."
+
+Fireball spell stun effect
+"The enemy is engulfed in a searing inferno as the fireball explodes, leaving them stunned and unable to react for a brief moment."
+"The intense heat and force of the fireball spell temporarily overwhelms the enemy, leaving them dazed and vulnerable."
+"As the fireball detonates, the enemy is enveloped in scorching flames, causing them to be momentarily stunned by the intense heat."
+"The enemy is caught in the fiery blast, leaving them staggered and temporarily incapacitated by the explosive impact."
+"The searing flames from the fireball spell leave the enemy momentarily stunned, struggling to regain their bearings amidst the intense heat."
+"The explosive force of the fireball spell momentarily overwhelms the enemy, leaving them stunned and reeling from the fiery blast."
+
+firball damage only effect
+"The enemy is engulfed in a blazing fireball, sustaining significant damage from the intense flames."
+"The fireball spell erupts in a burst of flames, scorching the enemy with powerful, searing heat."
+"The enemy is struck by a fiery explosion, suffering substantial damage from the intense impact of the fireball."
+"As the fireball spell detonates, the enemy is engulfed in flames, taking severe damage from the scorching inferno."
+"The fireball spell engulfs the enemy in a cascade of flames, causing substantial damage from the intense heat and fire."
+"The enemy is battered by the explosive force of the fireball spell, sustaining significant damage from the scorching flames."
+
+wrath of nature spell stun effect
+"The enemy is overwhelmed by the raging elements of the Wrath of Nature spell, leaving them momentarily stunned amidst the chaotic forces of nature."
+"As the Wrath of Nature spell surges, the enemy is ensnared by entangling vines and struck by thunderous energy, causing them to be momentarily stunned and disoriented."
+"The forces of nature unleash their fury upon the enemy, leaving them momentarily stunned by the relentless onslaught of primal energy."
+"The Wrath of Nature spell conjures a tempest of wind and lightning, leaving the enemy momentarily stunned by the raw power of the natural elements."
+"The enemy is caught in the tumultuous upheaval of the Wrath of Nature spell, leaving them momentarily stunned and bewildered by the ferocity of the natural forces."
+"As the Wrath of Nature spell rages, the enemy is assaulted by a barrage of elemental energy, causing them to be momentarily stunned by the overwhelming power of nature's wrath."
+
+wrath of nature damage only
+"The enemy is assailed by the relentless forces of the Wrath of Nature spell, suffering significant damage from the unyielding power of primal energy."
+"As the Wrath of Nature spell surges, the enemy is bombarded by the ferocity of natural elements, enduring substantial damage from the relentless onslaught of wind, lightning, and earth."
+"The forces of nature unleash their fury upon the enemy, inflicting substantial damage as the enemy is battered by the unyielding power of the natural elements."
+"The Wrath of Nature spell conjures a tempest of wind and lightning, causing the enemy to suffer significant damage from the relentless fury of the natural forces."
+"The enemy is caught in the tumultuous upheaval of the Wrath of Nature spell, enduring substantial damage as they are assaulted by a barrage of elemental energy."
+"As the Wrath of Nature spell rages, the enemy is beset by the unyielding power of nature's wrath, suffering substantial damage from the relentless onslaught of primal energy."
