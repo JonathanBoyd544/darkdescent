@@ -13,3 +13,5 @@ with Bar(" |=========== Level {} ============|\n".format(playerLvl), fill='=', m
         time.sleep(1)
         os.system("cls")
     print("Success!")
+    if bar >= xpForLevel:
+        bar.set(0)

@@ -19,133 +19,11 @@ import os
 import sys
 
 import random
-from random import randint
 import numpy as np
 from configparser import ConfigParser
-import time
-import time
-from tqdm import tqdm, trange
-# import pandas as pd
-# from progress.bar import Bar
-
-
 
 
 verbosity = 6
-incamount = 0
-playerLvl = 0
-xpForLevel = 50
-tof = "true"
-class Player:
-    def __init__(self):
-        self.level = 0
-        self.maxhealth = 100
-        self.health = self.maxhealth
-        self.damageMulti = 0
-
-def levelProg(xp = 0, width = 30):
-    left = width * xp // 100
-    right = width - left
-    print('\r[', '#' * left, ' ' * right, ']', f' {percent: 0f}%', sep = '', end = '', flush = True ) 
-
-
-def showStats(self):
-    global tof, xpForLevel
-    levelProg()
-    print("Health: {}/{}".format(self.health, self.maxhealth))
-    print("Power: {}".format(self.damageMulti))
-         
-        # with Bar(" |=========== Level {} ============|\n".format(self.level), fill='=', max=xpForLevel) as bar:
-        #     for i in range(xpForLevel):
-        #         # while tof == "true":
-        #         print("xp")
-        #         # os.system('cls')
-        #         print("These are your statistics:")
-
-        #         bar.next(randint(1, xpForLevel))
-        #         sleep(1)
-        #     if bar >= xpForLevel:
-        #         bar.finish()
-                   
-        #         # if Bar == 'FINISHED':
-        #         print("\n \nHealth: {}/{}".format(self.health, self.maxhealth))
-        #         print("Power: {}".format(self.damageMulti))
-        #             tof = "false"
-                    
-        #         increment = input("\nIncrement Bar?: ")
-        #         if increment == "n":
-                
-        #         else:
-        #             amount = randint(1, 100)
-        #             amount = input("How Much?: ")
-        #             amount = int(amount)
-        #             incamount = amount 
-        #             bar.next(incamount)
-        #             pass
-            
-        
-    
-
-        
-
-
-class Goblin:
-    def __init__(self, level):
-        self.name = "Goblin"
-        if level == "1":
-            self.health = 30.0
-            self.damage = 0.75
-        elif level == "2":
-            self.health = 45.0
-            self.damage = 1.0
-        elif level == "3":
-            self.health = 55.0
-            self.damage = 1.5
-        
-class Troll:
-    def __init__(self, level):
-        self.name = "Troll"
-        if level == "1":
-            self.health = 45.0
-            self.damage = 0.75
-        elif level == "2":
-            self.health = 55.0
-            self.damage = 1.0
-        elif level == "3":
-            self.health = 70.0
-            self.damage = 1.5
-
-class Giant_Spider:
-    def __init__(self, level):
-        self.name = "Giant Spider"
-        if level == "1":
-            self.health = 25.0
-            self.damage = 0.75
-        elif level == "2":
-            self.health = 40.0
-            self.damage = 1.0
-        elif level == "3":
-            self.health = 50.0
-            self.damage = 1.5
-
-class Bugbear:
-    def __init__(self, level):
-        self.name = "BugBear"
-        if level == "1":
-            self.health = 35.0
-            self.damage = 0.75
-        elif level == "2":
-            self.health = 50.0
-            self.damage = 1.0
-        elif level == "3":
-            self.health = 60.0
-            self.damage = 1.5            
-
-class Boss:
-    def __init__(self):
-        self.name = "Skeleton Mage"
-        self.health = 500.0
-        self.damage = 2
 
 # ENUMS
 
@@ -221,7 +99,6 @@ class Game:
         print()
 
 game = Game()
-player = Player()
 
 levels = []
 
@@ -244,7 +121,6 @@ action_dict = {
     "up":           "up",
     "west":         "w",
     "wield":        "wi",
-    "stats":        "st",
     }
 
 path_dict = { }
@@ -456,7 +332,7 @@ def title_screen_selections():
 def title_screen():     
     os.system('cls')
     print("##############################")
-    print("######## Dark Descent ########")
+    print("###### Labyrinth's Edge ######")
     print("##############################")
     print("           -Play-            ")
     print("           -Help-            ")
@@ -570,11 +446,6 @@ def get_dest_prompt(lvl, col, row):
     portal_list = []
     if levels[lvl][col, row, F_DESTPORTAL] > -1:
         portal_list.append("portal")
-        
-    enemy_list = []
-    if levels[lvl][col, row, F_DESTPORTAL] > -1:
-        enemy = randint
-        portal_list.append("portal")
 
     for dir in door_list:
         prompt += "\nThere is a door to the {}.".format(dir)
@@ -582,8 +453,6 @@ def get_dest_prompt(lvl, col, row):
         prompt += "\nThere are stairs leading {}.".format(dir)
     for dir in portal_list:
         prompt += "\nThere is a {} in the room.".format(dir)
-    for dir in enemy_list:
-        pass
 
     return prompt
 
@@ -665,7 +534,6 @@ def get_level(lvlnum):
 def destination(lvl, col, row, dir):
     ndir = 0
     if dir == 'n':
-        os.system('cls')
         ndir = F_DESTN
     elif dir == 's':
         ndir = F_DESTS
@@ -774,37 +642,21 @@ def test_movement():
     while True:
         look_room(lvl, col, row, full)
         full = False
-        action = get_action(">>> ")
+        action = get_action(">> ")
         if action == "q":
-            os.system('cls')
+            return
             title_screen()
             continue
         if action == "l":
-            os.system('cls')
-            print
             full = True
             continue
         if action == "u":
-            os.system('cls')
             print_warning("Nothing to use.")
             continue
         if action == "d":
-            os.system('cls')
             print_warning("Nothing to drop.")
             continue
-        # if action == "st":
-        #     os.system('cls')
-        #     print("These are your statistics:")
-        #     with Bar(" |=========== Level {} ============|\n".format(playerLvl), fill='=', max=xpForLevel) as bar:
-        #         while lvlInc == 0:
-        #             for i in range(xpForLevel):
-        #                 bar.next(randint(1, xpForLevel))
-        #                 time.sleep(1)
-
-            # showStats(self)
-            continue
         if not action in ['n','s','e','w','up','do']:
-            os.system('cls')
             print_error("Invalid command, try again")
             continue
         dest = destination(lvl, col, row, action)
@@ -815,8 +667,6 @@ def test_movement():
         col = get_col(dest)
         row = get_row(dest)
         print("lvl->{}, col->{}, row->{}".format(lvl, col, row))
-        os.system('cls')
-        
 
 def check_path_dict(dest):
     global path_dict
@@ -1015,10 +865,6 @@ def print_map(lvl):
 
     print(separatortxt)
 
-##### Easter Egg 1 #####
-def egg1():
-    
-
 def main():
     # config_init()
 
@@ -1050,7 +896,7 @@ def main():
         
     # sys.exit()
 
-    if verbosity > 5:
+    if verbosity > 25:
         for lvl in range(levelcnt):
             shape = np.shape(levels[lvl])
             # if verbosity > 25: print("spcs.shape: {}".format(shape))
@@ -1070,10 +916,9 @@ def main():
                                                                                                     levels[lvl][col,row,F_DESCNDX],
                                                                                                     levels[lvl][col,row,F_ITEMLIST]
                                                                                                     ))
-    
+
     if False:
         print("len(room_descs): {},  len(hall_descs): {}".format(len(room_descs), len(hall_descs)))
-    
 
         update_paths()
         check_paths()
@@ -1087,15 +932,14 @@ def main():
         print_map(3)
     
         sys.exit()
-    os.system('cls')
-    test_movement()
     
+    test_movement()
 
 if __name__ == '__main__':
-    title_screen()
+    # title_screen()
 
     # print()
-    # main()
+    main()
 
 
     if verbosity > 5:
