@@ -25,6 +25,25 @@ from configparser import ConfigParser
 
 verbosity = 6
 
+looted = False
+ingredient1 = 0
+ingr1collect = False
+ingredient2 = 0
+ingr2collect = False
+ingredient3 = 0
+ingr3collect = False
+ingredient4 = 0
+ingr4collect = False
+ingredient5 = 0
+ingr5collect = False
+ingredient6 = 0
+ingr6collect = False
+ingredient7 = 0
+ingr7collect = False
+transPotion = 0
+tpcollect = False
+gold = 0
+
 # ENUMS
 
 # room types
@@ -416,6 +435,66 @@ def get_dest_prompt(lvl, col, row):
     # global spcs
 
     prompt = ""
+
+    ##### Treasure Room Easter Egg #####
+    global looted, ingredient1, ingredient2, ingredient3, ingredient4, ingredient5, ingredient6, ingredient7, ingr1collect,ingr2collect, ingr3collect,ingr4collect, ingr5collect, ingr6collect, ingr7collect, transPotion, tpcollect, gold
+
+    
+
+    if lvl == 1 and col == 7 and row == 7 and looted == False:
+        print("\nThere is a small hole in the wall")
+        if transPotion == 1:
+            usePotion = input("Use your Transformation Potion? (yes/no)\n>>> ")
+            if usePotion.startswith("y"):
+                print("You drink the potion and you suddenly begin to shrink. Within seconds you have bee turned into a mouse. You enter the hole to find a large pouch of gold coins. You slowly start moving the gold coins through the hole. Once you are done, you crawl back through the hole and turn human again. You found 125 gold coins!")
+
+                gold += 125
+                print("You now have {} gold".format(gold))
+
+    if lvl == 1 and col == 3 and row == 1 and ingr1collect == False:
+        ingredient1 = 1
+        ingr1collect = True
+        print("You have collected a small vial of Lacewing Flies")
+    
+    if lvl == 1 and col == 6 and row == 4 and ingr2collect == False:
+        ingredient2 = 1
+        ingr2collect = True
+        print("You have collected a jar of leeches")
+
+    if lvl == 1 and col == 1 and row == 3 and ingr3collect == False:
+        ingredient3 = 1
+        ingr3collect = True
+        print("You have collected a bag of powdered Bicorn Horn")
+
+    if lvl == 1 and col == 4 and row == 6 and ingr4collect == False:
+        ingredient4 = 1
+        ingr4collect = True
+        print("You have collected a container of fluxweed")
+
+    if lvl == 1 and col == 0 and row == 8 and ingr5collect == False:
+        ingredient5 = 1
+        ingr5collect = True
+        print("You have collected a bundle of knotgrass")
+
+    if lvl == 1 and col == 8 and row == 2 and ingr6collect == False:
+        ingredient6 = 1
+        ingr6collect = True
+        print("You have collected a tuft of mysterious fur")
+
+    if lvl == 1 and col == 2 and row == 6 and ingr7collect == False:
+        ingredient7 = 1
+        ingr7collect = True
+        print("You have collected an empty glass bottle")
+
+    if ingredient1 == 1 and ingredient2 == 1 and ingredient3 == 1 and ingredient4 == 1 and ingredient5 == 1 and ingredient6 == 1 and ingredient7 == 1 and tpcollect == False:
+        transPotion = 1
+        tpcollect = True
+        print("You have recieved a Transformation Potion!")
+
+
+
+
+
     
     # itemlist_ndx = spcs[lvl, col, row, F_ITEMLIST]
     # if itemlist_ndx > 0:
@@ -635,6 +714,7 @@ def get_action(prompt):
     return ""
     
 def test_movement():
+
     lvl = 0
     col = 1
     row = 1
@@ -667,7 +747,9 @@ def test_movement():
         col = get_col(dest)
         row = get_row(dest)
         print("lvl->{}, col->{}, row->{}".format(lvl, col, row))
+    
 
+        
 def check_path_dict(dest):
     global path_dict
 
@@ -940,6 +1022,7 @@ if __name__ == '__main__':
 
     # print()
     main()
+
 
 
     if verbosity > 5:
