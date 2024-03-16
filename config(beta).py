@@ -22,6 +22,34 @@ import random
 import numpy as np
 from configparser import ConfigParser
 
+import copy
+
+# import item
+import item
+from item import Item
+from item import TYPE_GOLD
+from item import TYPE_WEAPON
+from item import TYPE_ARMOR
+from item import TYPE_RING
+from item import TYPE_KEY
+from item import TYPE_TROPHY
+from item import TYPE_SPELL_PORT_HOME
+from item import TYPE_SPELL_DISARM
+from item import TYPE_SPELL_CHECKPOINT
+from item import TYPE_SPELL_FIREBALL
+from item import TYPE_SPELL_LIGHTNING_BOLT
+from item import TYPE_SPELL_WRATH_OF_NATURE
+from item import TYPE_HEALTH_POTION
+from item import TYPE_POWER_POTION
+
+from item import RING_LUCKY
+from item import RING_POWER
+from item import RING_DEFENSE
+from item import RING_INVISIBILITY
+
+
+from config import verbosity
+
 
 verbosity = 6
 
@@ -46,7 +74,7 @@ tpcollect = False
 
 
 
-gold = 0
+# gold = 85
 
 # ENUMS
 
@@ -96,6 +124,78 @@ fldcnt = -1
 # game_levels = ""
 # game_version = ""
 # game_fnameprefix = ""
+
+class Inventory:
+    name = ""
+    items = { }
+
+    def __init__(self, name):
+        # verbosity = verbosity
+        self.name = name
+        self.items = { }
+
+    def take(self, item, count = -1):
+        if count > item.count or count == -1:
+            count = item.count
+        # new_count = item.count - count
+        
+        if item.name in self.items:
+            print("adding {} more {} item{} to {}".format(count, item.name, "s" if count != 1 else "", self.name))
+            self.items[item.name].count += count
+        else:
+            print("adding {} {} item{} to {}".format(count, item.name, "s" if count != 1 else "", self.name))
+            self.items[item.name] = copy.deepcopy(item)
+            self.items[item.name].count = count
+    
+    def drop(self, name, count = -1):
+        if not name in self.items:
+            print("drop: '{}' not found in {}".format(name, self.name))
+        else:
+            item = self.items[name]
+            if count > item.count or count == -1:
+                count = item.count
+            print("dropping {} {} item{} from {}".format(count, name, "s" if count != 1 else "", self.name))
+            item.count -= count
+            if item.count < 1:
+                print("last {} removed from {}".format(name, self.name))
+                del self.items[name]
+    
+    def move(self, name, dest, count = -1):
+        if not name in self.items:
+            print("drop: '{}' not found in {}".format(name, self.name))
+        else:
+            sCount = "{}".format(count if count > -1 else "all")
+            print("moving {} {} item{} from {} to {}".format(sCount, name, "s" if count != 1 else "", self.name, dest.name))
+            
+            item = self.items[name]
+            if count > item.count or count == -1:
+                count = item.count
+        
+            if name in dest.items:
+                print("adding {} more {} item{} to {}".format(count, item.name, "s" if count > 1 else "", dest.name))
+                dest.items[item.name].count += count
+            else:
+                print("adding {} {} item{} to {}".format(count, item.name, "s" if count != 1 else "", dest.name))
+                dest.items[item.name] = copy.deepcopy(item)
+                dest.items[item.name].count = count
+
+            print("dropping {} {} item{} from {}".format(count, name, "s" if count != 1 else "", self.name))
+            item.count -= count
+            if item.count < 1:
+                print("last {} removed from {}".format(name, self.name))
+                del self.items[name]
+        
+        
+    def list_inventory(self):
+        if len(self.items) < 1:
+            print("no items found in {}".format(self.name))
+        for name in self.items:
+            item = self.items[name]
+            if item.count == 1:
+                print("{}: '{}'".format(self.name, item.name))
+            else:
+                print("{}: '{}'  ({})".format(self.name, item.name, item.count))
+            
 
 class Game:
     name = "Generic"
@@ -611,6 +711,7 @@ def get_level(lvlnum):
 
 
 def destination(lvl, col, row, dir):
+    
     ndir = 0
     if dir == 'n':
         ndir = F_DESTN
@@ -657,6 +758,8 @@ def location_txt (lvl, col, row):
     return "<{} ({},{},{})>".format(spctype, lvl, col, row)
 
 def look_room(lvl, col, row, full):
+    global gold
+    gold = 851
     spcType = levels[lvl][col,row,F_TYPE]
     if levels[lvl][col,row,F_DESCNDX] < 0:
         if full:
@@ -698,6 +801,9 @@ def look_room(lvl, col, row, full):
     print("{}\nYou are {}".format(location_txt(lvl, col, row), desc))
 
 ##### Magic Shop #####
+    
+
+
     if lvl == 0 and col == 0 and row == 1:
         browse = input("Would you like to browse the Magic Shop? (yes/no)").lower()
         if browse.startswith("y"):
@@ -715,8 +821,12 @@ def look_room(lvl, col, row, full):
                 if spells.startswith("r"):
                     confirm = input("The Return to Village spell will return you to the village center from anywhere in the dungeon. (Cost: 80 gold)\nAre you sure yo want to purchase this? (yes/no)").lower()
                     if confirm.startswith("y") and gold >= 80:
-                        another = input(You have )
-
+                        itm = magic.items["Return To Village"]
+                        inventory.take(itm)
+                        gold -= 80
+                        another = input(f"You have purchased the Return to Village spell for 80 gold coins. You have {gold} left")
+                        pass
+ 
 
                     
 
@@ -763,7 +873,12 @@ def test_movement():
         if action == "d":
             print_warning("Nothing to drop.")
             continue
-        if not action in ['n','s','e','w','up','do']:
+        if action == "i":
+            inv = Inventory("Pack")
+            inv.list_inventory()
+            # print(inv.lst)
+            continue
+        if not action in ['n','s','e','w','up','do', 'i']:
             print_error("Invalid command, try again")
             continue
         dest = destination(lvl, col, row, action)
@@ -1040,6 +1155,48 @@ def main():
         print_map(3)
     
         sys.exit()
+
+    ##### Add Stock to Shops and Set Inventory Values #####
+    global pile, inventory, magic
+    pile = Inventory("Pile")
+    inventory = Inventory("Pack")
+    magic = Inventory("Magic Shop")
+    
+    # Magic shop stock
+    global itm
+    itm = Item(name="Return To Village", itemType=TYPE_SPELL_PORT_HOME, tier=1, count=100000, limit=1, cost=80, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Disarm", itemType=TYPE_SPELL_DISARM, tier=1, count=1000, limit=10, cost=20, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Checkpoint", itemType=TYPE_SPELL_CHECKPOINT, tier=1, count=100000, limit=3, cost=60, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Fireball [Tier 1]", itemType=TYPE_SPELL_FIREBALL, tier=1, count=100000, limit=3, cost=30, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Fireball [Tier 2]", itemType=TYPE_SPELL_FIREBALL, tier=2, count=100000, limit=3, cost=60, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Fireball [Tier 3]", itemType=TYPE_SPELL_FIREBALL, tier=3, count=1000, limit=3, cost=90, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Lightning Bolt [Tier 1]", itemType=TYPE_SPELL_LIGHTNING_BOLT, tier=1, count=100000, limit=3, cost=30, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Lightning Bolt [Tier 2]", itemType=TYPE_SPELL_LIGHTNING_BOLT, tier=2, count=100000, limit=3, cost=60, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Lightning Bolt [Tier 3]", itemType=TYPE_SPELL_LIGHTNING_BOLT, tier=3, count=100000, limit=3, cost=90, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Wrath of Nature [Tier 1]", itemType=TYPE_SPELL_WRATH_OF_NATURE, tier=1, count=100000, limit=3, cost=30, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Wrath of Nature [Tier 2]", itemType=TYPE_SPELL_WRATH_OF_NATURE, tier=2, count=100000, limit=3, cost=60, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Wrath of Nature [Tier 3]", itemType=TYPE_SPELL_WRATH_OF_NATURE, tier=3, count=100000, limit=3, cost=90, nValue=0, fValue=1.5)
+    magic.take(itm)
+
+    magic.list_inventory()
+
+
+
+    
+    
+   
+    
     
     test_movement()
 

@@ -691,8 +691,7 @@ def look_room(lvl, col, row, full):
             if spcType == 1:
                 desc = "a room."
             else:
-                desc = "a hallway."
-        
+                desc = "a hallway."    
     print("{}\nYou are {}".format(location_txt(lvl, col, row), desc))
     if desc[len(desc)-1] != " ":
         prompt = get_dest_prompt(lvl, col, row)
@@ -711,6 +710,7 @@ def get_action(prompt):
     return ""
     
 def test_movement():
+
     lvl = 0
     col = 1
     row = 1
@@ -742,6 +742,7 @@ def test_movement():
         lvl = get_lvl(dest)
         col = get_col(dest)
         row = get_row(dest)
+      
         print("lvl->{}, col->{}, row->{}".format(lvl, col, row))
 
 def check_path_dict(dest):

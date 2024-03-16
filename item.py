@@ -17,6 +17,7 @@ TYPE_KEY = 4
 TYPE_TROPHY = 5
 TYPE_SPELL_PORT_HOME = 64
 TYPE_SPELL_DISARM = 65
+TYPE_SPELL_CHECKPOINT = 66
 TYPE_SPELL_FIREBALL = 92
 TYPE_SPELL_LIGHTNING_BOLT = 93
 TYPE_SPELL_WRATH_OF_NATURE = 94
@@ -115,6 +116,7 @@ def main():
     helmet = Item("Baseball Cap", TYPE_ARMOR, 0, 2, 2, 15, 8, 0.0)
     ring = Item("Lucky Ring", TYPE_RING, RING_LUCKY, 1, 1, 350, 10, 0.0)
     disarm = Item("Disarm", TYPE_SPELL_DISARM, 1, 4, 5, 20, 0, 0.0)
+    port = Item("Return To Village", TYPE_SPELL_PORT_HOME, 1, 4, 5, 20, 0, 0.0)
     poison = Item("Poison-2", TYPE_POWER_POTION, 2, 3, 5, 25, 120, 1.8)
     elixir = Item("Elixir-3", TYPE_HEALTH_POTION, 3, 2, 5, 50, 20, 0.0)
 
