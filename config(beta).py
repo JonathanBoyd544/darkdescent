@@ -595,8 +595,8 @@ def get_dest_prompt(lvl, col, row):
         tpcollect = True
         print("\nYou have recieved a Transformation Potion!")
 
-    
-    # itemlist_ndx = spcs[lvl, col, row, F_ITEMLIST]
+     
+    # itemlist_ndx = spcs[lvl, col, row, F_ ITEMLIST]
     # if itemlist_ndx > 0:
     #     for item in item_lists[itemlist_ndx]:
     #         if item[0] in ["a", "A", "e", "E", "i", "I", "o", "O", "u", "U"]:
