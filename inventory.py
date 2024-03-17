@@ -20,8 +20,8 @@ from item import TYPE_SPELL_DISARM
 from item import TYPE_SPELL_FIREBALL
 from item import TYPE_SPELL_LIGHTNING_BOLT
 from item import TYPE_SPELL_WRATH_OF_NATURE
-from item import TYPE_HEALTH_POTION
-from item import TYPE_POWER_POTION
+from item import TYPE_HEALS
+from item import TYPE_POWER
 
 
 from item import RING_LUCKY

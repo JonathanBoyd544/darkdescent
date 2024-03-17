@@ -5,28 +5,28 @@ Items:
 			Helmet(50 gold): 1pt
 			Chestplate(75 gold): 3pts
 			Leggings(65 gold): 2pts
-			Boots(60 gold): 1pt
+			Boots(50 gold): 1pt
 			Total: 7pts
 		
 		Chainmail Armor:
 			Helmet(65 gold): 2pts
 			Chestplate(85 gold): 5pts
 			Leggings(75 gold): 3pts
-			Boots(70 gold): 2pts
+			Boots(65 gold): 2pts
 			Total: 12pts
 
 		Bronze Armor:
 			Helmet(80 gold): 4pts
 			Chestplate(105 gold): 7pts
 			Leggings(95 gold): 5pts
-			Boots(90 gold): 4pts
+			Boots(80 gold): 4pts
 			Total: 20pts
 		
 		Iron Armor
 			Helmet(100 gold): 7pts
 			Chestplate(120 gold): 12pts
 			Leggings(110 gold): 10pts
-			Boots(105 gold): 7pts
+			Boots(100 gold): 7pts
 			Total: 36pts
 
 		Dragon Scale Armor:

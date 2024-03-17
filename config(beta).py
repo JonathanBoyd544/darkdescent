@@ -39,8 +39,8 @@ from item import TYPE_SPELL_CHECKPOINT
 from item import TYPE_SPELL_FIREBALL
 from item import TYPE_SPELL_LIGHTNING_BOLT
 from item import TYPE_SPELL_WRATH_OF_NATURE
-from item import TYPE_HEALTH_POTION
-from item import TYPE_POWER_POTION
+from item import TYPE_HEALS
+from item import TYPE_POWER
 
 from item import RING_LUCKY
 from item import RING_POWER
@@ -759,7 +759,7 @@ def location_txt (lvl, col, row):
 
 def look_room(lvl, col, row, full):
     global gold
-    gold = 851
+    gold = 85
     spcType = levels[lvl][col,row,F_TYPE]
     if levels[lvl][col,row,F_DESCNDX] < 0:
         if full:
@@ -801,39 +801,70 @@ def look_room(lvl, col, row, full):
     print("{}\nYou are {}".format(location_txt(lvl, col, row), desc))
 
 ##### Magic Shop #####
-    
-
 
     if lvl == 0 and col == 0 and row == 1:
         browse = input("Would you like to browse the Magic Shop? (yes/no)").lower()
         if browse.startswith("y"):
-            if os == 'nt':
-                os.system('cls')
-            else:
-                os.system('clear')
-            option = input("You walk around the shop. Looking at the display cases. What would you like purchase?\nSpells\nHeals And Buffs\n>>> ").lower()
+            option = input("You walk around the shop. Looking at the display cases. What would you like purchase?\nSpells\nHeals And Buffs\nexit\n>>> ").lower()
+
             if option.startswith("s"):
-                if os == 'nt':
-                    os.system('cls')
-                else:
-                    os.system('clear')
                 spells = input("The shop has a variety of spells for sale. Which would you like to buy?\nPassive:\nReturn to village\n Checkpoint\nDisarm\nOffensive:\nLightning Spell\nFireball Spell\nWrath of Nature Spell\n>>> ").lower()
+
                 if spells.startswith("r"):
-                    confirm = input("The Return to Village spell will return you to the village center from anywhere in the dungeon. (Cost: 80 gold)\nAre you sure yo want to purchase this? (yes/no)").lower()
-                    if confirm.startswith("y") and gold >= 80:
-                        itm = magic.items["Return To Village"]
-                        inventory.take(itm)
-                        gold -= 80
-                        another = input(f"You have purchased the Return to Village spell for 80 gold coins. You have {gold} left")
-                        pass
- 
-
-                    
-
-            pass
+                    confirm = input("The Return to Village spell will return you to the village center from anywhere in the dungeon. (Cost: 80 gold)\nAre you sure you want to purchase this? (yes/no)").lower()
+                else:
+                    print_error("Invalid command, try again")
+            
+            else:
+                print_error("Invalid command, try again")
+            
         else:
-            pass
+            print_error("Invalid command, try again")
 
+    #     inShop = True
+    #     while inShop == True:
+    #          browse = input("Would you like to browse the Magic Shop? (yes/no)").lower()
+    #          if browse.startswith("y"):
+    #             # if os == 'nt':
+    #             #     os.system('cls')
+    #             # else:
+    #             #     os.system('clear')
+    #             option = input("You walk around the shop. Looking at the display cases. What would you like purchase?\nSpells\nHeals And Buffs\n>>> ").lower()
+                # if option.startswith("s"):
+                #     spells = input("The shop has a variety of spells for sale. Which would you like to buy?\nPassive:\nReturn to village\n Checkpoint\nDisarm\nOffensive:\nLightning Spell\nFireball Spell\nWrath of Nature Spell\n>>> ").lower()
+    #                 if spells.startswith("r"):
+    #                     confirm = input("The Return to Village spell will return you to the village center from anywhere in the dungeon. (Cost: 80 gold)\nAre you sure you want to purchase this? (yes/no)").lower()
+    #                     if confirm.startswith("y") and gold >= 80:
+    #                         itm = magic.items["Return To Village"]
+    #                         inventory.take(itm)
+    #                         gold -= 80
+    #                         print(f"You have purchased the Return to Village spell for 80 gold coins. You have {gold} left")
+    #                         another = input("Would you like to purchase something else? (yes/no)\n>>> ").lower()
+    #                         if another.startswith("y"):
+    #                             continue
+    #                         elif snother.startswith("n"):
+    #                             magic_loop = False
+    #                 if spells.startswith("c"):
+    #                     confirm = input("The Checkpoint spell will input save your location at any point in the dungeon and allow you to return later. (Cost: 80 gold)\nAre you sure you want to purchase this? (yes/no)").lower()
+    #                     if confirm.startswith("y") and gold >= 80:
+    #                         itm = magic.items["Checkpoint"]
+    #                         inventory.take(itm)
+    #                         gold -= 80
+    #                         print(f"You have purchased the Checkpoint spell for 80 gold coins. You have {gold} left")
+    #                         another = input("Would you like to purchase something else? (yes/no)\n>>> ").lower()
+    #                         if another.startswith("y"):
+    #                             continue
+    #                         elif snother.startswith("n"):
+    #                             magic_loop = False
+    #                 else:
+    #                     print_error("Invalid command, try again")
+    #                     continue
+    #         elif browse.startswith("n"):
+    #             magic_loop = False
+    #         else:
+    #             print_error("Invalid command, try again")
+    #             continue
+           
     if desc[len(desc)-1] != " ":
         prompt = get_dest_prompt(lvl, col, row)
         if prompt > "":
@@ -1161,6 +1192,7 @@ def main():
     pile = Inventory("Pile")
     inventory = Inventory("Pack")
     magic = Inventory("Magic Shop")
+    armory = Inventory("Armory")
     
     # Magic shop stock
     global itm
@@ -1189,7 +1221,91 @@ def main():
     itm = Item(name="Wrath of Nature [Tier 3]", itemType=TYPE_SPELL_WRATH_OF_NATURE, tier=3, count=100000, limit=3, cost=90, nValue=0, fValue=1.5)
     magic.take(itm)
 
+    itm = Item(name="Basic Bandage", itemType=TYPE_HEALS, tier=0, count=100000, limit=5, cost=10, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Healing Draught[Tier 1]", itemType=TYPE_HEALS, tier=1, count=100000, limit=3, cost=20, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Healing Draught [Tier 2]", itemType=TYPE_HEALS, tier=2, count=100000, limit=3, cost=30, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Healing Draught [Tier 3]", itemType=TYPE_HEALS, tier=3, count=100000, limit=3, cost=50, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Power Potion [Tier 1]", itemType=TYPE_POWER, tier=1, count=100000, limit=3, cost=50, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Power Potion [Tier 2]", itemType=TYPE_POWER, tier=2, count=100000, limit=3, cost=50, nValue=0, fValue=1.5)
+    magic.take(itm)
+    itm = Item(name="Power Potion [Tier 3]", itemType=TYPE_POWER, tier=3, count=100000, limit=3, cost=50, nValue=0, fValue=1.5)
+    magic.take(itm)
+
+
+
+    ##### Armory Stock #####
+    itm = Item(name="Leather Helmet", itemType=TYPE_ARMOR, tier=1, count=100000, limit=1, cost=50, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Leather Chestplate", itemType=TYPE_ARMOR, tier=1, count=100000, limit=1, cost=75, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Leather Leggings", itemType=TYPE_ARMOR, tier=1, count=100000, limit=1, cost=60, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Leather Boots", itemType=TYPE_ARMOR, tier=1, count=100000, limit=1, cost=50, nValue=0, fValue=1.5)
+    armory.take(itm)
+
+    itm = Item(name="Chainmail Helmet", itemType=TYPE_ARMOR, tier=2, count=100000, limit=1, cost=65, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Chainmail Chestplate", itemType=TYPE_ARMOR, tier=2, count=100000, limit=1, cost=85, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Chainmail Leggings", itemType=TYPE_ARMOR, tier=2, count=100000, limit=1, cost=75, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Chainmail Boots", itemType=TYPE_ARMOR, tier=2, count=100000, limit=1, cost=65, nValue=0, fValue=1.5)
+    armory.take(itm)
+
+    itm = Item(name="Bronze Helmet", itemType=TYPE_ARMOR, tier=3, count=100000, limit=1, cost=80, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Bronze Chestplate", itemType=TYPE_ARMOR, tier=3, count=100000, limit=1, cost=105, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Bronze Leggings", itemType=TYPE_ARMOR, tier=3, count=100000, limit=1, cost=95, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Bronze Boots", itemType=TYPE_ARMOR, tier=3, count=100000, limit=1, cost=80, nValue=0, fValue=1.5)
+    armory.take(itm)
+
+    itm = Item(name="Iron Helmet", itemType=TYPE_ARMOR, tier=4, count=100000, limit=1, cost=100, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Iron Chestplate", itemType=TYPE_ARMOR, tier=4, count=100000, limit=1, cost=120, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Iron Leggings", itemType=TYPE_ARMOR, tier=4, count=100000, limit=1, cost=110, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Iron Boots", itemType=TYPE_ARMOR, tier=4, count=100000, limit=1, cost=100, nValue=0, fValue=1.5)
+    armory.take(itm)
+
+    itm = Item(name="Dragon Scale Helmet", itemType=TYPE_ARMOR, tier=5, count=100000, limit=1, cost=150, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Dragon Scale Chestplate", itemType=TYPE_ARMOR, tier=5, count=100000, limit=1, cost=200, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Dragon Scale Leggings", itemType=TYPE_ARMOR, tier=5, count=100000, limit=1, cost=175, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Dragon Scale Boots", itemType=TYPE_ARMOR, tier=5, count=100000, limit=1, cost=150, nValue=0, fValue=1.5)
+    armory.take(itm)
+
+    itm = Item(name="Rusty Butterknife", itemType=TYPE_WEAPON, tier=1, count=100000, limit=1, cost=0, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Rusty Longsword", itemType=TYPE_WEAPON, tier=1, count=100000, limit=1, cost=30, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Bronze Dagger", itemType=TYPE_WEAPON, tier=2, count=100000, limit=1, cost=55, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Bronze Sword", itemType=TYPE_WEAPON, tier=2, count=100000, limit=1, cost=70, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Iron Dagger", itemType=TYPE_WEAPON, tier=3, count=100000, limit=1, cost=90, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Iron Sword", itemType=TYPE_WEAPON, tier=3, count=100000, limit=1, cost=100, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Goblin Cleaver (Great Axe)", itemType=TYPE_WEAPON, tier=4, count=100000, limit=1, cost=150, nValue=0, fValue=1.5)
+    armory.take(itm)
+    itm = Item(name="Dragon's Bane", itemType=TYPE_WEAPON, tier=5, count=100000, limit=1, cost=0, nValue=200, fValue=1.5)
+    armory.take(itm)
+
+    
+
     magic.list_inventory()
+    print()
+    armory.list_inventory()
 
 
 
