@@ -757,6 +757,33 @@ def location_txt (lvl, col, row):
 
     return "<{} ({},{},{})>".format(spctype, lvl, col, row)
 
+def buy_spells():
+    spells = ''
+    while spells == '':
+        spells = input("The shop has a variety of spells for sale. Which would you like to buy?\nPassive:\nReturn to village\n Checkpoint\nDisarm\nOffensive:\nLightning Spell\nFireball Spell\nWrath of Nature Spell\neXit\n>>> ").lower()
+    
+        if spells.startswith('x'):
+            return
+        if spells.startswith("r"):
+            confirm = input("The Return to Village spell will return you to the village center from anywhere in the dungeon. (Cost: 80 gold)\nAre you sure you want to purchase this? (yes/no)").lower()
+            if confirm.startswith('y'):
+                print("Congratulations, you now own a Return to Village spell")
+        else:
+            print_error("Invalid command, try again")
+    return
+
+def browse_magic_shop():
+    while True:
+        option = input("You walk around the shop. Looking at the display cases. What would you like purchase?\nSpells\nHeals And Buffs\neXit\n>>> ").lower()
+        if option.startswith('e') or option.startswith('x'):
+            return
+    
+        if option.startswith("s"):
+            buy_spells()
+            return
+        else:
+            print_error("Invalid command, try again")
+
 def look_room(lvl, col, row, full):
     global gold
     gold = 85
@@ -805,20 +832,8 @@ def look_room(lvl, col, row, full):
     if lvl == 0 and col == 0 and row == 1:
         browse = input("Would you like to browse the Magic Shop? (yes/no)").lower()
         if browse.startswith("y"):
-            option = input("You walk around the shop. Looking at the display cases. What would you like purchase?\nSpells\nHeals And Buffs\nexit\n>>> ").lower()
-
-            if option.startswith("s"):
-                spells = input("The shop has a variety of spells for sale. Which would you like to buy?\nPassive:\nReturn to village\n Checkpoint\nDisarm\nOffensive:\nLightning Spell\nFireball Spell\nWrath of Nature Spell\n>>> ").lower()
-
-                if spells.startswith("r"):
-                    confirm = input("The Return to Village spell will return you to the village center from anywhere in the dungeon. (Cost: 80 gold)\nAre you sure you want to purchase this? (yes/no)").lower()
-                else:
-                    print_error("Invalid command, try again")
-            
-            else:
-                print_error("Invalid command, try again")
-            
-        else:
+            browse_magic_shop()
+        elif not browse.startswith('n'):
             print_error("Invalid command, try again")
 
     #     inShop = True
