@@ -1,4 +1,4 @@
-Labyrinth's Edge:
+Dark Descent:
 
 Start player in house in village. 
 House has chest with gate key which unlocks dungeon gate.
